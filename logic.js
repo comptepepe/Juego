@@ -3,97 +3,99 @@ let time = 10;
 let intervalId;
 
 window.onload = function windowOnLoad() {
-    this.startGame();
+  this.startGame();
+};
+
+function setStartTime() {
+  time = 10;
 }
 
-function setStartTime(){
-    time = 10;
+function setStartScore() {
+  score = 0;
 }
 
-function setStartScore(){
-    score = 0;
-}
+function startGame() {
+  this.setStartScore();
+  this.setStartTime();
+  this.generateRandomFields();
+  this.renderScore();
+  this.renderTime();
 
-function startGame(){
-    this.setStartScore();
-    this.setStartTime();
-    this.generateRandomFields();
-    this.renderScore();
-    this.renderTime();
-
-    intervalId = setInterval( updateTime, 1000);
+  intervalId = setInterval(updateTime, 1000);
 }
 
 function generateRandomFields() {
-
-    document.getElementById("content11").innerHTML = getRandomContent();
-    document.getElementById("content12").innerHTML = getRandomContent();
-    document.getElementById("content13").innerHTML = getRandomContent();
-    document.getElementById("content21").innerHTML = getRandomContent();
-    document.getElementById("content22").innerHTML = getRandomContent();
-    document.getElementById("content23").innerHTML = getRandomContent();
-    document.getElementById("content31").innerHTML = getRandomContent();
-    document.getElementById("content32").innerHTML = getRandomContent();
-    document.getElementById("content33").innerHTML = getRandomContent();
-    
-    }
-
-
-function getRandomContent(){
-    let random = Math.random() * 100;
-    if( random > 50 ){
-        return 'X'
-    }else{
-        return 'O'
-    }
+  document.getElementById("content11").innerHTML = getRandomContent();
+  document.getElementById("content12").innerHTML = getRandomContent();
+  document.getElementById("content13").innerHTML = getRandomContent();
+  document.getElementById("content21").innerHTML = getRandomContent();
+  document.getElementById("content22").innerHTML = getRandomContent();
+  document.getElementById("content23").innerHTML = getRandomContent();
+  document.getElementById("content31").innerHTML = getRandomContent();
+  document.getElementById("content32").innerHTML = getRandomContent();
+  document.getElementById("content33").innerHTML = getRandomContent();
 }
 
-function cellClicked(elementClicked){
-    if(elementClicked.innerHTML === document.getElementById("content22").innerHTML ){
-        this.changeScore(score + 1);
-    }
-    this.generateRandomFields();
+function getRandomContent() {
+  let random = Math.random() * 100;
+  if (random > 50) {
+    return "X";
+  } else {
+    return "O";
+  }
 }
 
-function changeScore(newScore){
-    score = newScore;
-    this.renderScore();
+function cellClicked(elementClicked) {
+  if (
+    elementClicked.innerHTML === document.getElementById("content22").innerHTML
+  ) {
+    this.changeScore(score + 1);
+  }
+  this.generateRandomFields();
 }
 
-function renderScore(){
-    let scoreText = new String('Score: ' + score)
-    document.getElementById("score").innerHTML = scoreText;
+function changeScore(newScore) {
+  score = newScore;
+  this.renderScore();
 }
 
-function renderTime(){
-    let timeText = new String('Time: ' + time)
-    document.getElementById("timer").innerHTML = timeText;
+function renderScore() {
+  let scoreText = new String("Score: " + score);
+  document.getElementById("score").innerHTML = scoreText;
 }
 
-function updateTime(){
-    time = time - 1;
-    if(time <= 0){
-        time = 0;
-        clearInterval(intervalId);
-    }
-    this.renderTime();
-
-    if(time > 0){
-        return;
-    }
-
-    endGame();
-
-};
-
-function endGame(){
-    var endGameMessage = new String("End Game!\nScore: " + score);
-    window.alert(endGameMessage);
-    
-    // this.startGame();
-    this.navigateToStart();
+function renderTime() {
+  let timeText = new String("Time: " + time);
+  document.getElementById("timer").innerHTML = timeText;
 }
 
-function navigateToStart(){
-    window.location.replace('index.html');
+function updateTime() {
+  time = time - 1;
+  if (time <= 0) {
+    time = 0;
+    clearInterval(intervalId);
+  }
+  this.renderTime();
+
+  if (time > 0) {
+    return;
+  }
+
+  endGame();
+}
+
+function endGame() {
+  var endGameMessage = new String("End Game!\nScore: " + score);
+  window.alert(endGameMessage);
+
+  // this.startGame();
+  this.navigateToStart();
+}
+
+function navigateToStart() {
+  try {
+    window.location.replace("index.html");
+  } catch (error) {
+    window.location("index.html");
+  }
 }
