@@ -90,6 +90,10 @@ function endGame(){
     var endGameMessage = new String("End Game!\nScore: " + score);
     window.alert(endGameMessage);
     
-    this.startGame();
+    // this.startGame();
+    this.navigateToStart();
+}
 
+function navigateToStart(){
+    window.location.replace('index.html');
 }

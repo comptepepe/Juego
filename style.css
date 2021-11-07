@@ -3,7 +3,12 @@ table {
     height: 93vh;
 }
 
-#wrapper {
+#startButton {
+    width: 10%;
+    justify-content: center;
+}
+
+.wrapper {
     display: flex;
 }
 
